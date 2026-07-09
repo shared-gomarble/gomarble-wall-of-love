@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GoMarble — Pricing Mockup (dark, conversion clarity)</title>
+<style>
+/* shared theme inlined for self-contained hosting */
+/* ============================================================================
+   GoMarble Marketing Mockups — Shared Dark Theme
+   Reference styling for Framer changes. Dark canvas built from the CANONICAL
+   design-system dark ramp (design/design-system/project/colors_and_type.css,
+   :root.dark overrides). Teal is the secondary brand accent; marble cyan is the
+   bright accent / glow. Inter everywhere + Instrument Serif italic accent word.
+   These are MOCKUPS — the goal is to communicate copy, structure, hierarchy,
+   proof and CTA logic, on-brand. Not production code.
+   ============================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..800;1,14..32,400..600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  /* ---- Brand ---- */
+  --gm-marble-cyan:     #00DFD6;
+  --gm-marble-cyan-200: #B9F9FF;
+  --gm-teal:            #006E78;
+  --gm-teal-deep:       #005F69;
+  --gm-teal-800:        #57B6C2;
+
+  /* ---- Canonical dark ramp (from colors_and_type.css :root.dark) ---- */
+  --gm-dark-bg:    #1F2023;   /* page background           */
+  --gm-dark-300:   #292A2E;   /* cards / surfaces          */
+  --gm-dark-400:   #323339;   /* quiet fills / raised      */
+  --gm-dark-500:   #3A3B41;   /* borders                   */
+  --gm-dark-600:   #46474E;   /* strong borders            */
+
+  /* A slightly deeper, teal-tinted canvas for marketing hero bands.
+     Stays in-system (cyan/teal) but reads richer than flat charcoal. */
+  --gm-band:       #1A1C1F;
+  --gm-band-teal:  #112A2C;   /* teal-washed band for accent sections */
+
+  /* ---- Themed roles (dark) ---- */
+  --gm-bg:            var(--gm-dark-bg);
+  --gm-surface:       var(--gm-dark-300);
+  --gm-surface-quiet: var(--gm-dark-400);
+  --gm-border:        var(--gm-dark-500);
+  --gm-border-strong: var(--gm-dark-600);
+  --gm-text:          #F1F2F3;
+  --gm-text-muted:    #B3B5BC;
+  --gm-text-faint:    #787A87;
+  --gm-accent:        var(--gm-marble-cyan);
+  --gm-accent-text:   #61CCD8;
+  --gm-on-accent:     #06181B;   /* dark text on cyan button */
+
+  /* ---- Type ---- */
+  --gm-font-sans:  'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gm-font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --gm-font-mono:  'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --gm-text-display: 56px;
+  --gm-text-h1: 40px;
+  --gm-text-h2: 30px;
+  --gm-text-h3: 22px;
+  --gm-text-lg: 18px;
+  --gm-text-base: 16px;
+  --gm-text-sm: 14px;
+  --gm-text-xs: 12px;
+
+  /* ---- Shape & depth ---- */
+  --gm-radius-sm: 8px;
+  --gm-radius-md: 12px;
+  --gm-radius-lg: 16px;
+  --gm-radius-xl: 24px;
+  --gm-radius-pill: 999px;
+
+  --gm-shadow-md: 0 6px 24px rgba(0,0,0,0.45);
+  --gm-shadow-lg: 0 18px 60px rgba(0,0,0,0.55);
+  --gm-glow-cyan: 0 0 0 4px rgba(0,223,214,0.16), 0 0 40px rgba(0,223,214,0.18);
+
+  --gm-maxw: 1200px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--gm-bg);
+  color: var(--gm-text);
+  font-family: var(--gm-font-sans);
+  font-size: var(--gm-text-base);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* subtle teal radial glow used behind hero / accent bands */
+.gm-glow-bg { position: relative; overflow: hidden; }
+.gm-glow-bg::before {
+  content: "";
+  position: absolute; inset: -20% 10% auto 10%;
+  height: 480px;
+  background: radial-gradient(60% 60% at 50% 0%, rgba(0,223,214,0.16), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---- Layout ---- */
+.gm-wrap { max-width: var(--gm-maxw); margin: 0 auto; padding: 0 24px; }
+.gm-section { padding: 88px 0; }
+.gm-section--tight { padding: 56px 0; }
+.gm-band { background: var(--gm-band); }
+.gm-band-teal { background: var(--gm-band-teal); }
+.gm-center { text-align: center; }
+.gm-eyebrow {
+  font-size: var(--gm-text-xs); font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gm-accent-text);
+  margin: 0 0 14px;
+}
+
+/* ---- Type helpers ---- */
+.gm-display {
+  font-family: var(--gm-font-sans); font-weight: 500;
+  font-size: var(--gm-text-display); line-height: 1.04; letter-spacing: -0.025em;
+  margin: 0;
+}
+.gm-display em, .gm-serif {
+  font-family: var(--gm-font-serif); font-style: italic; font-weight: 400;
+  letter-spacing: 0; color: var(--gm-marble-cyan);
+}
+.gm-h1 { font-size: var(--gm-text-h1); font-weight: 600; line-height: 1.12; letter-spacing: -0.02em; margin: 0; }
+.gm-h2 { font-size: var(--gm-text-h2); font-weight: 600; line-height: 1.18; letter-spacing: -0.015em; margin: 0; }
+.gm-h3 { font-size: var(--gm-text-h3); font-weight: 600; line-height: 1.25; margin: 0; }
+.gm-lead { font-size: var(--gm-text-lg); color: var(--gm-text-muted); line-height: 1.55; margin: 0; }
+.gm-muted { color: var(--gm-text-muted); }
+.gm-faint { color: var(--gm-text-faint); }
+
+/* ---- Buttons (canonical CTA ladder) ---- */
+.gm-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--gm-font-sans); font-size: var(--gm-text-base); font-weight: 600;
+  padding: 13px 22px; border-radius: var(--gm-radius-pill);
+  border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  transition: transform .15s ease, filter .15s ease, background .15s ease, border-color .15s ease;
+  white-space: nowrap;
+}
+.gm-btn:hover { transform: translateY(-1px); }
+.gm-btn--primary { background: var(--gm-marble-cyan); color: var(--gm-on-accent); box-shadow: var(--gm-glow-cyan); }
+.gm-btn--primary:hover { filter: brightness(1.06); }
+.gm-btn--secondary { background: transparent; color: var(--gm-text); border-color: var(--gm-border-strong); }
+.gm-btn--secondary:hover { border-color: var(--gm-marble-cyan); color: var(--gm-marble-cyan); }
+.gm-btn--ghost { background: transparent; color: var(--gm-text-muted); padding: 13px 8px; }
+.gm-btn--ghost:hover { color: var(--gm-text); }
+.gm-btn--lg { padding: 16px 28px; font-size: var(--gm-text-lg); }
+
+/* ---- Pills / chips ---- */
+.gm-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--gm-text-xs); font-weight: 600;
+  padding: 6px 13px; border-radius: var(--gm-radius-pill);
+  background: var(--gm-surface-quiet); color: var(--gm-text-muted);
+  border: 1px solid var(--gm-border);
+}
+.gm-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gm-marble-cyan); box-shadow: 0 0 10px var(--gm-marble-cyan); }
+
+/* ---- Cards ---- */
+.gm-card {
+  background: var(--gm-surface); border: 1px solid var(--gm-border);
+  border-radius: var(--gm-radius-lg); padding: 28px;
+  transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.gm-card:hover { border-color: rgba(0,223,214,0.5); transform: translateY(-3px); box-shadow: var(--gm-shadow-md); }
+.gm-card__icon {
+  width: 42px; height: 42px; border-radius: var(--gm-radius-md);
+  display: grid; place-items: center; margin-bottom: 16px;
+  background: rgba(0,223,214,0.12); color: var(--gm-marble-cyan);
+  border: 1px solid rgba(0,223,214,0.25); font-size: 20px;
+}
+
+/* ---- Nav ---- */
+.gm-nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(31,32,35,0.82); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--gm-border);
+}
+.gm-nav__inner { display: flex; align-items: center; gap: 28px; height: 64px; }
+.gm-nav__logo { font-weight: 700; font-size: 19px; letter-spacing: -0.02em; color: var(--gm-text); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+.gm-nav__logo .orb { width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #7af6ef, var(--gm-marble-cyan) 55%, var(--gm-teal)); box-shadow: 0 0 14px rgba(0,223,214,0.7); }
+.gm-nav__links { display: flex; gap: 22px; align-items: center; margin-left: 8px; }
+.gm-nav__links a { color: var(--gm-text-muted); text-decoration: none; font-size: var(--gm-text-sm); font-weight: 500; }
+.gm-nav__links a:hover { color: var(--gm-text); }
+.gm-nav__spacer { flex: 1; }
+.gm-nav__cta { display: flex; gap: 10px; align-items: center; }
+
+/* ---- Logo strip ---- */
+.gm-logos { display: flex; flex-wrap: wrap; gap: 18px 38px; align-items: center; justify-content: center; }
+.gm-logos span { color: var(--gm-text-faint); font-weight: 600; font-size: 17px; letter-spacing: 0.01em; opacity: 0.85; }
+
+/* ---- Stat ---- */
+.gm-stat__num { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; color: var(--gm-marble-cyan); line-height: 1; }
+.gm-stat__lbl { font-size: var(--gm-text-sm); color: var(--gm-text-muted); margin-top: 8px; }
+
+/* ---- Grid helpers ---- */
+.gm-grid { display: grid; gap: 20px; }
+.gm-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.gm-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.gm-grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ---- Steps (Diagnose → Decide → Execute → Launch) ---- */
+.gm-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; counter-reset: step; }
+.gm-step { position: relative; padding: 24px; background: var(--gm-surface); border: 1px solid var(--gm-border); border-radius: var(--gm-radius-lg); }
+.gm-step__n { font-family: var(--gm-font-mono); font-size: var(--gm-text-xs); color: var(--gm-accent-text); letter-spacing: 0.1em; }
+.gm-step__t { font-weight: 600; margin: 8px 0 6px; }
+
+/* ---- Testimonial ---- */
+.gm-quote { background: var(--gm-surface); border: 1px solid var(--gm-border); border-radius: var(--gm-radius-lg); padding: 24px; }
+.gm-quote p { margin: 0 0 16px; font-size: var(--gm-text-base); line-height: 1.55; }
+.gm-quote__who { display: flex; align-items: center; gap: 12px; }
+.gm-quote__av { width: 38px; height: 38px; border-radius: 50%; background: var(--gm-surface-quiet); border: 1px solid var(--gm-border); display: grid; place-items: center; color: var(--gm-text-muted); font-weight: 600; font-size: 14px; }
+.gm-quote__name { font-weight: 600; font-size: var(--gm-text-sm); }
+.gm-quote__role { font-size: var(--gm-text-xs); color: var(--gm-text-faint); }
+.gm-quote__metric { color: var(--gm-marble-cyan); font-weight: 600; }
+
+/* ---- Footer ---- */
+.gm-footer { background: var(--gm-band); border-top: 1px solid var(--gm-border); padding: 56px 0 36px; }
+.gm-footer__cols { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 28px; }
+.gm-footer h4 { font-size: var(--gm-text-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--gm-text-faint); margin: 0 0 14px; }
+.gm-footer a { display: block; color: var(--gm-text-muted); text-decoration: none; font-size: var(--gm-text-sm); margin-bottom: 9px; }
+.gm-footer a:hover { color: var(--gm-text); }
+.gm-footer__bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--gm-border); color: var(--gm-text-faint); font-size: var(--gm-text-xs); }
+
+/* ---- Annotations (mockup-only notes for the Framer team) ---- */
+.gm-annot {
+  font-family: var(--gm-font-mono); font-size: 11px; line-height: 1.45;
+  background: rgba(255,97,0,0.10); border: 1px dashed rgba(255,97,0,0.5);
+  color: #ffb787; border-radius: 8px; padding: 8px 11px; margin: 10px 0;
+}
+.gm-annot b { color: #ff9a52; }
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  :root { --gm-text-display: 38px; --gm-text-h1: 30px; --gm-text-h2: 24px; }
+  .gm-grid--2, .gm-grid--3, .gm-grid--4, .gm-steps, .gm-footer__cols { grid-template-columns: 1fr; }
+  .gm-nav__links { display: none; }
+  .gm-section { padding: 60px 0; }
+}
+
+</style>
+<style>
+  .ptop { padding: 64px 0 32px; text-align:center; }
+  .controls { display:flex; flex-direction:column; gap:18px; align-items:center; margin:28px 0 8px; }
+  .seg-ctl { display:inline-flex; background:var(--gm-surface-quiet); border:1px solid var(--gm-border); border-radius:var(--gm-radius-pill); padding:4px; gap:4px; }
+  .seg-ctl button { border:0; background:transparent; color:var(--gm-text-muted); font:inherit; font-size:14px; font-weight:600; padding:8px 16px; border-radius:var(--gm-radius-pill); cursor:pointer; }
+  .seg-ctl button.on { background:var(--gm-marble-cyan); color:var(--gm-on-accent); }
+  .spend { display:inline-flex; flex-wrap:wrap; gap:6px; justify-content:center; }
+  .spend button { border:1px solid var(--gm-border); background:var(--gm-surface); color:var(--gm-text-muted); font:inherit; font-size:13px; font-weight:600; padding:8px 14px; border-radius:var(--gm-radius-pill); cursor:pointer; }
+  .spend button.on { border-color:var(--gm-marble-cyan); color:var(--gm-marble-cyan); }
+  .save { font-size:12px; color:var(--gm-marble-cyan); font-weight:600; }
+  .cards { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:36px; align-items:start; }
+  .pcard { background:var(--gm-surface); border:1px solid var(--gm-border); border-radius:var(--gm-radius-xl); padding:26px; display:flex; flex-direction:column; }
+  .pcard.pop { border-color:var(--gm-marble-cyan); box-shadow:var(--gm-glow-cyan); }
+  .pcard__name { font-weight:700; font-size:18px; }
+  .pcard__for { color:var(--gm-text-faint); font-size:13px; margin:4px 0 18px; min-height:32px; }
+  .pcard__price { font-size:36px; font-weight:700; letter-spacing:-0.02em; }
+  .pcard__price small { font-size:14px; color:var(--gm-text-faint); font-weight:500; }
+  .pcard__custom { font-size:30px; font-weight:700; }
+  .badge { display:inline-block; font-size:11px; font-weight:700; color:var(--gm-on-accent); background:var(--gm-marble-cyan); padding:3px 10px; border-radius:var(--gm-radius-pill); margin-bottom:10px; }
+  .feat { list-style:none; padding:0; margin:18px 0 0; }
+  .feat li { font-size:14px; color:var(--gm-text-muted); padding:7px 0 7px 24px; position:relative; }
+  .feat li::before { content:"✓"; position:absolute; left:0; color:var(--gm-marble-cyan); font-weight:700; }
+  .feat li.hero-feat { color:var(--gm-text); font-weight:600; }
+  .pcard .gm-btn { margin-top:20px; justify-content:center; }
+  .credits { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .credits .gm-card { padding:18px; text-align:center; }
+  .credits .n { font-family:var(--gm-font-mono); color:var(--gm-accent-text); font-size:13px; }
+  .credits .t { font-weight:600; font-size:14px; margin:6px 0 4px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="gm-nav">
+  <div class="gm-wrap gm-nav__inner">
+    <a class="gm-nav__logo" href="homepage.html"><span class="orb"></span>GoMarble</a>
+    <div class="gm-nav__links"><a href="#">Features ▾</a><a href="#">Solutions ▾</a><a href="#">AI Ads Library</a><a href="pricing.html">Pricing</a><a href="#">MCP</a></div>
+    <div class="gm-nav__spacer"></div>
+    <div class="gm-nav__cta"><a href="#" class="gm-btn gm-btn--ghost">Login</a><a href="#" class="gm-btn gm-btn--secondary">Book a Demo</a><a href="#" class="gm-btn gm-btn--primary">Start Free Trial</a></div>
+  </div>
+</nav>
+
+<!-- TOP -->
+<header class="ptop gm-glow-bg">
+  <div class="gm-wrap" style="max-width:720px;">
+    <p class="gm-eyebrow">Pricing</p>
+    <h1 class="gm-display" style="font-size:46px;">Priced to your ad spend.<br><em>Execution</em> included on Max.</h1>
+    <p class="gm-lead" style="margin:16px auto 0;">Pick your monthly ad spend — plans scale with you. Every plan starts with a 7-day free trial.</p>
+
+    <div class="controls">
+      <div class="spend">
+        <button class="on">&lt; $50K/mo</button>
+        <button>$50K–$250K</button>
+        <button>$250K–$1M</button>
+        <button>$1M–$3M</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="seg-ctl"><button class="on">Monthly</button><button>Yearly</button></div>
+        <span class="save">Save 30% yearly</span>
+      </div>
+    </div>
+    <div class="gm-annot" style="max-width:640px;margin:14px auto 0;">KEEP the existing spend selector + monthly/annual toggle (they work). This mockup just makes them more prominent and adds the "Save 30%" cue. Prices below = the &lt;$50K tier (matches live + context-pack v3 §4).</div>
+  </div>
+</header>
+
+<!-- CARDS (<$50K tier) -->
+<section class="gm-section--tight">
+  <div class="gm-wrap">
+    <div class="cards">
+      <!-- Plus -->
+      <div class="pcard">
+        <div class="pcard__name">Plus</div>
+        <div class="pcard__for">Solo marketers &amp; small brands</div>
+        <div class="pcard__price">$69<small>/mo</small></div>
+        <a href="#" class="gm-btn gm-btn--secondary">Start 7-Day Free Trial</a>
+        <ul class="feat">
+          <li>500 AI Credits / month</li>
+          <li>Up to 5 Brands</li>
+          <li>1 Team Member</li>
+          <li>Scheduled Reports</li>
+          <li>Performance Audits</li>
+          <li>Creative Analysis</li>
+          <li>Competitor Research</li>
+          <li>Slack Integration</li>
+        </ul>
+      </div>
+      <!-- Pro (popular at this tier) -->
+      <div class="pcard pop">
+        <span class="badge">Most Popular</span>
+        <div class="pcard__name">Pro</div>
+        <div class="pcard__for">Agile marketing teams</div>
+        <div class="pcard__price">$139<small>/mo</small></div>
+        <a href="#" class="gm-btn gm-btn--primary">Start 7-Day Free Trial</a>
+        <ul class="feat">
+          <li>1,000 AI Credits / month</li>
+          <li>Up to 10 Brands</li>
+          <li>5 Team Members</li>
+          <li>Scheduled Reports</li>
+          <li>Performance Audits</li>
+          <li>Creative Analysis</li>
+          <li>Competitor Research</li>
+          <li>Slack Integration</li>
+        </ul>
+      </div>
+      <!-- Max -->
+      <div class="pcard">
+        <div class="pcard__name">Max</div>
+        <div class="pcard__for">Scaling agencies &amp; enterprise brands</div>
+        <div class="pcard__price">$299<small>/mo</small></div>
+        <a href="#" class="gm-btn gm-btn--secondary">Start 7-Day Free Trial</a>
+        <ul class="feat">
+          <li>4,000 AI Credits / month</li>
+          <li>Unlimited Brands</li>
+          <li>Unlimited Team Members</li>
+          <li class="hero-feat">⚡ Agent Mode — launch ads &amp; edit campaigns</li>
+          <li>Everything in Pro</li>
+        </ul>
+      </div>
+      <!-- All In -->
+      <div class="pcard">
+        <div class="pcard__name">All In</div>
+        <div class="pcard__for">Custom — built for you</div>
+        <div class="pcard__custom">Custom</div>
+        <a href="#" class="gm-btn gm-btn--secondary" style="margin-top:32px;">Talk to Sales</a>
+        <ul class="feat">
+          <li>Everything in Max</li>
+          <li>Flexible Credit Allocation</li>
+          <li>Bespoke Data Source Integrations</li>
+          <li>Dedicated Customer Support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="gm-annot" style="margin-top:20px;">Plus shows only under &lt;$50K; All In appears under the $50K+ tiers (Plus drops off). "Most Popular" sits on Pro here and moves to Max on higher tiers — match live behavior. All prices/inclusions verified against context-pack v3 §4.</div>
+  </div>
+</section>
+
+<!-- CREDIT EXPLAINER (new — conversion clarity) -->
+<section class="gm-section gm-band">
+  <div class="gm-wrap">
+    <div class="gm-center" style="max-width:600px;margin:0 auto 36px;">
+      <p class="gm-eyebrow">Credits, in plain English</p>
+      <h2 class="gm-h2">What a credit gets you</h2>
+      <p class="gm-lead" style="margin-top:12px;">Each task costs a few credits. Here's the rough math so you can size your plan.</p>
+    </div>
+    <div class="credits">
+      <div class="gm-card"><div class="n">3–8</div><div class="t">Performance report</div></div>
+      <div class="gm-card"><div class="n">5–10</div><div class="t">Performance analysis</div></div>
+      <div class="gm-card"><div class="n">8–12</div><div class="t">Creative breakdown</div></div>
+      <div class="gm-card"><div class="n">10–15</div><div class="t">Competitor research</div></div>
+      <div class="gm-card"><div class="n">12–20</div><div class="t">Agent Mode action</div></div>
+    </div>
+    <p class="gm-center gm-faint" style="font-size:13px;margin-top:18px;">e.g. Pro's 1,000 credits ≈ 100+ analyses or 60+ creative breakdowns a month. Top-up credits roll over and are shared team-wide.</p>
+    <div class="gm-annot" style="max-width:720px;margin:18px auto 0;">NEW — the credit system is currently unexplained on the live pricing page (a top conversion question). This table answers "is this enough for my team?" before they bounce.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="gm-section">
+  <div class="gm-wrap" style="max-width:780px;">
+    <h2 class="gm-h2" style="margin-bottom:20px;">Pricing FAQ</h2>
+    <div style="border-bottom:1px solid var(--gm-border);padding:18px 0;"><b>Is there a free trial?</b><p class="gm-muted" style="margin:8px 0 0;font-size:15px;">Yes — every plan starts with a 7-day free trial.</p></div>
+    <div style="border-bottom:1px solid var(--gm-border);padding:18px 0;"><b>How does annual billing work?</b><p class="gm-muted" style="margin:8px 0 0;font-size:15px;">Switch the toggle to Yearly to save 30% versus monthly.</p></div>
+    <div style="border-bottom:1px solid var(--gm-border);padding:18px 0;"><b>What happens if I run out of credits?</b><p class="gm-muted" style="margin:8px 0 0;font-size:15px;">Add top-up credits anytime — they roll over and are shared across your team.</p></div>
+    <div style="border-bottom:1px solid var(--gm-border);padding:18px 0;"><b>Which plan has Agent Mode?</b><p class="gm-muted" style="margin:8px 0 0;font-size:15px;">Agent Mode (execute &amp; launch) is included on Max and All In.</p></div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="gm-section gm-band-teal gm-center gm-glow-bg">
+  <div class="gm-wrap" style="max-width:600px;">
+    <h2 class="gm-display" style="font-size:38px;">Try it on your<br>own accounts.</h2>
+    <div class="hero__cta" style="display:flex;gap:12px;justify-content:center;margin-top:24px;">
+      <a href="#" class="gm-btn gm-btn--primary gm-btn--lg">Start Free Trial</a>
+      <a href="#" class="gm-btn gm-btn--secondary gm-btn--lg">Book a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="gm-footer">
+  <div class="gm-wrap">
+    <div class="gm-footer__cols">
+      <div><a class="gm-nav__logo" href="homepage.html" style="margin-bottom:14px;"><span class="orb"></span>GoMarble</a><p class="gm-faint" style="font-size:13px;max-width:240px;">The AI agent that diagnoses your paid media — and fixes it.</p></div>
+      <div><h4>Features</h4><a href="#">Agent Mode</a><a href="#">Performance Insights</a><a href="#">Creative Analysis</a><a href="#">Creative Research</a><a href="#">Automated Reports</a></div>
+      <div><h4>Solutions</h4><a href="#">Brands</a><a href="#">Agencies</a><a href="#">Media Buyers</a><a href="#">Creative Strategists</a></div>
+      <div><h4>Resources</h4><a href="#">AI Ads Library</a><a href="#">GoMarble MCP</a><a href="#">Templates</a><a href="#">Blog</a><a href="#">Docs</a></div>
+      <div><h4>Company</h4><a href="#">About</a><a href="pricing.html">Pricing</a><a href="#">Managed Services</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+    </div>
+    <div class="gm-footer__bottom"><span>© 2026 GoMarble. All rights reserved.</span><span>Trusted by 10,000+ marketers across 100+ countries</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
